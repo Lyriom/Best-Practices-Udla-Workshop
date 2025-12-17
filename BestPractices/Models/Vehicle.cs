@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Best_Practices.Models
 {
     public abstract class Vehicle : IVehicle
     {
-        #region Private properties
+        // estado interno
         private bool _isEngineOn { get; set; }
-        #endregion
 
-        #region Properties
+        // ID unico del vehiculo
         public readonly Guid ID;
+
         public virtual int Tires { get; set; }
         public string Color { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
+
+        // requerido: año actual por defecto (se aplica con DefaultsProvider)
+        public int Year { get; set; }
+
+        // para el siguiente sprint: 20 propiedades sin romper todo el proyecto
+        // se dejan en diccionario para minimizar cambios
+        public Dictionary<string, string> ExtraProperties { get; set; } = new Dictionary<string, string>();
+
         public double Gas { get; set; }
         public double FuelLimit { get; set; }
-
-        #endregion
-
-        #region Constructors
 
         public Vehicle(string color, string brand, string model, double fuelLimit = 10)
         {
@@ -33,12 +35,9 @@ namespace Best_Practices.Models
             FuelLimit = fuelLimit;
         }
 
-        #endregion
-
-        #region Methods
         public void AddGas()
         {
-            if(Gas <= FuelLimit)
+            if (Gas <= FuelLimit)
             {
                 Gas += 0.1;
             }
@@ -47,6 +46,7 @@ namespace Best_Practices.Models
                 throw new Exception("Gas Full");
             }
         }
+
         public void StartEngine()
         {
             if (_isEngineOn)
@@ -79,8 +79,5 @@ namespace Best_Practices.Models
 
             _isEngineOn = false;
         }
-
-        #endregion
-
     }
 }

@@ -1,8 +1,4 @@
-﻿using Best_Practices.Infraestructure.Singletons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Best_Practices.Models
 {
